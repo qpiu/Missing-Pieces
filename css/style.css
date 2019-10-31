@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MikadoBold';
-    src: url('fonts/Mikado Bold.otf');
+    src: url('../fonts/Mikado Bold.otf');
 }
 
 * {
