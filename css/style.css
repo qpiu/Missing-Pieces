@@ -16,13 +16,7 @@ html, body, .container {
 .container {
     background-color: #FDE9AA;
     background-size: cover;
-    /* display: -webkit-flexbox;
-    display: -ms-flexbox;
-    display: -webkit-flex; */
     display: flex;
-    -webkit-flex-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     justify-content: center;
 }
