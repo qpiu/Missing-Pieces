@@ -1,0 +1,186 @@
+@font-face {
+    font-family: 'MikadoBold';
+    src: url('fonts/Mikado Bold.otf');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, .container {
+    height: 100%;
+    margin: 0;
+    font-family: MikadoBold, sans-serif;
+}
+
+.container {
+    background-color: #FDE9AA;
+    background-size: cover;
+    /* display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex; */
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div #intro-content {
+    padding: 2em;
+    transition: opacity 800ms linear;
+}
+
+div #intro-content h2 {
+    font-family: fairwater-script, sans-serif;
+    font-size: 48px;
+    color: #ffa87a;
+    margin: 0em;
+    line-height: 0.8;
+    opacity: 0;
+}
+
+div #intro-content h1 {
+    margin: 0em;
+    padding: .5em 2.5em;
+}
+
+div #intro-content span {
+    font-family: MikadoBold, sans-serif;
+    font-size: 110px;
+    color: #FF8A4C;
+    position: relative;
+    top: -150px;
+    opacity: 0;
+}
+
+div #intro-content button {
+    opacity: 0;
+    display: block;
+    margin: auto;
+    font-family: MikadoBold, sans-serif;
+    font-size: 24px;
+    color: #666666;
+    background-color: rgba(255, 239, 228, 0.815);
+    letter-spacing: 1px;
+    border: none;
+    width: 120px;
+    height: 120px;
+    clip-path: polygon(20% 0%, 100% 38%, 70% 90%, 0% 100%);
+}
+
+div #intro-content button:hover {
+    animation: morph .8s;
+    animation-fill-mode: forwards;
+    /* clip-path: polygon(12% 6%, 29% 14%, 71% 8%, 91% 29%, 84% 85%, 54% 80%, 20% 92%, 5% 43%); */
+}
+
+@keyframes morph {
+    100% {
+        clip-path: polygon(0% 20%, 100% 20%, 100% 80%, 0% 80%);
+        background-color: #FF6919;
+        color: rgb(250, 235, 227);
+    }
+}
+
+#connect-container, #calibration-container {
+    display: none;
+    opacity: 0;
+    transition: all 800ms linear;
+    text-align: center;
+}
+
+#connect-container h2, #calibration-container h2 {
+    position: relative;
+    top: -500px;
+    opacity: 0;
+    transition: opacity 800ms linear;
+    font-family: MikadoBold, sans-serif;
+    font-size: 48px;
+    color: #FF8A4C;
+    margin: 0em;
+    padding: 1em;
+    line-height: 0.8;
+}
+
+#connect-container .connect-btn {
+    opacity: 0;
+    transition: opacity 800ms linear;
+    border: none;
+    font-family: MikadoBold, sans-serif;
+    font-size: 20px;
+    color: #666666;
+    background-color: rgba(255, 239, 228, 0.815);
+    padding: .5em 1em;
+    outline: none;
+}
+
+#connect-container .connect-btn:hover {
+    background-color: #FF6919;
+    color: rgb(250, 235, 227);
+}
+
+#phone-connect-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 239, 228, 0.815);
+    margin: .5em 2em;
+    padding: .5em;
+}
+
+#connect-container input {
+    border: none;
+    color: #666666;
+    background-color: rgba(255, 239, 228, 0.815);
+    width: 350px;
+    height: 40px;
+    font-family: MikadoBold, sans-serif;
+    font-size: 22px;
+    padding: .5em;
+    margin: 0em 1em;
+    text-align: center;
+}
+
+#game-container input:focus {
+    outline: none;
+}
+
+#calibration-container #player-calibration {
+    display: none;
+    opacity: 0;
+    transition: opacity 800ms linear;
+    text-align: center;
+}
+
+#player-calibration #message-c1, #player-calibration #message-c2 {
+    display: none;
+    opacity: 0;
+    color: #666666;
+}
+
+#player-calibration #calibration-area {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    text-align: left;
+    background-color: #FF8A4C;
+}
+
+.blinking {
+    -webkit-animation: 1s blink ease infinite;
+    -moz-animation: 1s blink ease infinite;
+    -ms-animation: 1s blink ease infinite;
+    -o-animation: 1s blink ease infinite;
+    animation: 1s blink ease infinite;
+}
+
+@keyframes blink {
+    from, to {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
