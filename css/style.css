@@ -17,6 +17,7 @@ html, body, .container {
     background-color: #FDE9AA;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -137,7 +138,7 @@ div #intro-content button:hover {
     text-align: center;
 }
 
-#game-container input:focus {
+#connect-container input:focus {
     outline: none;
 }
 
@@ -178,3 +179,14 @@ div #intro-content button:hover {
         opacity: 1;
     }
 }
+
+#game-container {
+    display: none;
+    opacity: 0;
+    transition: all 800ms linear;
+    text-align: center;
+    padding: 2em;
+}
+
+
+

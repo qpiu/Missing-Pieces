@@ -17,9 +17,8 @@ document.querySelector("#intro-content button").addEventListener('click', () => 
 
 const connectBtnClicked = () => {
     player = new Player(game);
-    const ip = document.querySelector("#game-container input").value;
+    const ip = document.querySelector("#connect-container input").value;
     player.phoneConnect(ip);
-    setTimeout(finishConnect, 2500);
 }
 
 const beginConnect = () => {

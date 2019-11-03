@@ -1,9 +1,35 @@
 import { gamestage } from './Utils.js';
 
+class Position {
+    constructor(x, y) {
+        console.log(`new Pos(${x}, ${y})`);
+        this.x = x;
+        this.y = y;
+    }
+
+    setX(newX) {
+        this.x = newX;
+    }
+
+    setY(newY) {
+        this.y = newY;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+    }
+}
+
 export class Player {
     constructor(game) {
         console.log("new player device");
         this.game = game;
+        this.realCanvasOrigin = new Position(-1, -1); // top left position of space
+        this.realCanvasSize = new Position(-1, -1);   // bottom right position of space
     }
 
     phoneConnect(ip) {
@@ -35,6 +61,7 @@ export class Player {
                 break;
             case gamestage.CALIB_2:
                 // TODO: record x, y position
+                this.game.beginGame();
                 break;
         }
     }

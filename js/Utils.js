@@ -9,7 +9,8 @@ const fadeOut = (s) => {
 const gamestage = {
     START: 'start',
     CALIB_1: 'calibration_1',
-    CALIB_2: 'calibration_2'
+    CALIB_2: 'calibration_2',
+    BEGIN_GAME: 'begin_game'
 }
 
 export { fadeOut, gamestage };
