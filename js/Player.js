@@ -22,6 +22,10 @@ class Position {
     getY() {
         return this.y;
     }
+
+    toString() {
+        return '(x:' + this.getX() + ',' + 'y:' + this.getY() + ')';
+    }
 }
 
 export class Player {
@@ -37,17 +41,36 @@ export class Player {
         this.device.start(ip, (e) => {
             this.device.makeVibrate();
             this.device.subscribeTouch(() => this.phoneTouchHandler());
-            TweenMax.to("#connect-container h2", 1, { opacity: "0", ease: Power2.easeInOut });
-            const btn_el = document.querySelector("#connect-container button");
+            //TweenMax.to("#connect-container h2", 1, { opacity: "0", ease: Power2.easeInOut });
+            const btn_el = document.querySelector("#phone-connect-input button");
             // btn_el.removeEventListener('click', connectBtnClicked);
             const new_btn_el = btn_el.cloneNode(true);
             btn_el.parentNode.replaceChild(new_btn_el, btn_el);
             new_btn_el.style.backgroundColor = "#cccccc";
             new_btn_el.style.color = "#ffffff";
             new_btn_el.textContent = "Connected";
-            const input_el = document.querySelector("#connect-container input");
+            const input_el = document.querySelector("#phone-connect-input input");
             input_el.setAttribute("readonly", "readonly");
-            this.game.beginCalibration_1();
+        });
+    }
+
+    sensorConnect(ip) {
+        this.sensor_address = "http://" + ip;
+        $.get(this.sensor_address, (data, status) => {
+            console.log("Connecting to sensor");
+            console.log(data);
+            if (status === "success") {
+                console.log("sensor connected");
+                const btn_el = document.querySelector("#sensor-connect-input button");
+                const new_btn_el = btn_el.cloneNode(true);
+                btn_el.parentNode.replaceChild(new_btn_el, btn_el);
+                new_btn_el.style.backgroundColor = "#cccccc";
+                new_btn_el.style.color = "#ffffff";
+                new_btn_el.textContent = "Connected";
+                const input_el = document.querySelector("#sensor-connect-input input");
+                input_el.setAttribute("readonly", "readonly");
+                this.game.beginCalibration_1();
+            }
         });
     }
 
@@ -56,11 +79,23 @@ export class Player {
         const current_stage = this.game.stage;
         switch (current_stage) {
             case gamestage.CALIB_1:
-                // TODO: record x, y position
+                // record x, y position
+                $.get(this.sensor_address, (data, status) => {
+                    this.realCanvasOrigin.setX(data.x);
+                    this.realCanvasOrigin.setY(data.y);
+                    console.log(this.realCanvasOrigin);
+                    $('#message-c1').append('<p>' + this.realCanvasOrigin.toString() + '</p>')
+                });
                 this.game.beginCalibration_2();
                 break;
             case gamestage.CALIB_2:
-                // TODO: record x, y position
+                // record x, y position
+                $.get(this.sensor_address, (data, status) => {
+                    this.realCanvasSize.setX(data.x);
+                    this.realCanvasSize.setY(data.y);
+                    console.log(this.realCanvasSize);
+                    $('#message-c2').append('<p>' + this.realCanvasSize.toString() + '</p>')
+                });
                 this.game.beginGame();
                 break;
         }

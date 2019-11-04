@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.typekit.net/jnw1avc.css">
     <link rel="stylesheet" href="./css/style.css">
-    <!-- <script src="js/intro.js"></script> -->
+    <!-- Import Libraries from CDN -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <!-- <script language="javascript" type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js"></script> -->
+    <!-- Import Libraries in ./js/lib -->
     <script src="./js/lib/utils.js"></script>
     <script src="./js/lib/tramontana.js"></script>
     <script src="./js/lib/p5.min.js"></script>
+    <!-- Import my js modules -->
     <script defer type="module" src="./js/main.js"></script>
     <script defer src="./js/sketch.js"></script>
     <title>Missing Pieces</title>
@@ -27,9 +31,13 @@
         </div>
 
         <div id="connect-container">
-            <h2 id="h2-phone-connect">Connect to your phone</h2>
+            <h2 id="h2-connection">Setup Connections</h2>
             <div id="phone-connect-input">
-                <input type="text" />
+                <input type="text" placeholder="IP Address of phone" />
+                <button class="connect-btn">Connect</button>
+            </div>
+            <div id="sensor-connect-input">
+                <input type="text" placeholder="IP Address of arduino" />
                 <button class="connect-btn">Connect</button>
             </div>
         </div>
@@ -46,7 +54,19 @@
             </div>
         </div>
         <div id="game-container">
-                
+            <div id="player-position-container">
+                <div class="player-position" id="player-position-x">
+                    <button id="label-pos-x">X</button>
+                    <input type="text" id="pos-x" readonly />
+                </div>
+                <div class="player-position" id="player-position-y">
+                    <button id="label-pos-y">Y</button>
+                    <input type="text" id="pos-y" readonly />
+                </div>
+            </div>
+            <div id="game-canvas">
+
+            </div>
         </div>
     </div>
 </body>

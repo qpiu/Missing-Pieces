@@ -17,7 +17,8 @@ export class Game {
     beginCalibration_1 = () => {
         this.setStage(gamestage.CALIB_1);
         console.log(this.getStage());
-        TweenMax.to("#connect-container h2, #phone-connect-input", 1, { display: "none", ease: Power2.easeInOut });
+        TweenMax.to("#connect-container h2", 1, { opacity: "0", ease: Power2.easeInOut });
+        TweenMax.to("#connect-container h2, #phone-connect-input, #sensor-connect-input", 1, { display: "none", ease: Power2.easeInOut });
         setTimeout( function () {
             TweenMax.to("#calibration-container, #calibration-container #player-calibration, #player-calibration #message-c1", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
             TweenMax.to("#calibration-container #h2-player-calibration", 2, { top: "0", opacity: "1", ease: Elastic.easeInOut });    
@@ -46,10 +47,6 @@ export class Game {
             TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
             TweenMax.to("#game-container #h2-missing", 1, { top: "0", opacity: "0.6", ease: Power2.easeInOut });    
             }, 1000
-        );
-        setTimeout( function () {
-            TweenMax.to("#game-container #h2-pieces", 1, { top: "0", opacity: "1", ease: Elastic.easeInOut });    
-            }, 1500
         );
         // TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
 

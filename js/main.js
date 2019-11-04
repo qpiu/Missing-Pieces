@@ -15,14 +15,20 @@ document.querySelector("#intro-content button").addEventListener('click', () => 
     setTimeout(beginConnect, 1000);
 });
 
-const connectBtnClicked = () => {
+const phoneConnectBtnClicked = () => {
     player = new Player(game);
-    const ip = document.querySelector("#connect-container input").value;
+    const ip = document.querySelector("#phone-connect-input input").value;
     player.phoneConnect(ip);
+}
+
+const sensorConnectBtnClicked = () => {
+    const ip = document.querySelector("#sensor-connect-input input").value;
+    player.sensorConnect(ip);
 }
 
 const beginConnect = () => {
     TweenMax.to("#connect-container, #connect-container button, #connect-container input", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
-    TweenMax.to("#connect-container #h2-phone-connect", 3, { top: "0", opacity: "1", ease: Elastic.easeInOut });
-    document.querySelector("#connect-container button").addEventListener('click', connectBtnClicked);
+    TweenMax.to("#connect-container #h2-connection", 3, { top: "0", opacity: "1", ease: Elastic.easeInOut });
+    document.querySelector("#phone-connect-input button").addEventListener('click', phoneConnectBtnClicked);
+    document.querySelector("#sensor-connect-input button").addEventListener('click', sensorConnectBtnClicked);
 }
