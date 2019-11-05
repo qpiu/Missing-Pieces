@@ -190,7 +190,7 @@ div #intro-content button:hover {
 
 #game-container #player-position-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     padding: 1em;
 }
@@ -199,7 +199,7 @@ div #intro-content button:hover {
     display: flex;
     justify-content: space-between;
     margin: .5em;
-    width: 280px;
+    width: 190px;
     background-color: #ffffff;
 }
 
@@ -209,14 +209,14 @@ div #intro-content button:hover {
     width: 100%;
     text-align: center;
     font-family: MikadoBold, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     color: #666666;
 }
 
 .player-position button {
     border: none;
     font-family: MikadoBold, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     color: #666666;
     background-color: #eeeeee;
     padding: .5em 1em;
@@ -226,6 +226,23 @@ div #intro-content button:hover {
 
 .player-position .unit {
     color: #666666;
-    padding: 0em 1em;
+    padding: .5em 1em;
+    margin: 0px;
+}
+
+#game-container #btn-load-img {
+    border: none;
+    font-family: MikadoBold, sans-serif;
+    font-size: 16px;
+    color: #666666;
+    background-color: #eeeeee;
+    padding: .5em 1em;
+    outline: none;
+    margin: 1em;
+}
+
+#game-container #btn-load-img:hover {
+    background-color: #FF6919;
+    color: #eeeeee;
 }
 
