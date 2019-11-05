@@ -7,15 +7,13 @@
 
 // new p5(sketch, 'game-canvas');
 
-let serial;
-
-function setup() {
-    let canvas = createCanvas(500, 500);
-    canvas.parent('game-canvas');
-    background(0);
+// function setup() {
+//     let canvas = createCanvas(500, 500);
+//     canvas.parent('game-canvas');
+//     background(0);
  
-}
+// }
 
-function draw() {
+// function draw() {
 
-}
+// }

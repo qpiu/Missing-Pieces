@@ -32,8 +32,9 @@ export class Player {
     constructor(game) {
         console.log("new player device");
         this.game = game;
-        this.realCanvasOrigin = new Position(-1, -1); // top left position of space
-        this.realCanvasSize = new Position(-1, -1);   // bottom right position of space
+        this.realCanvasOrigin = new Position(-1, -1); // top left position of the space
+        this.realCanvasSize = new Position(-1, -1);   // bottom right position of the space
+        this.realCurrentPosition = new Position(-1, -1); // current position in the space
     }
 
     phoneConnect(ip) {
@@ -96,11 +97,22 @@ export class Player {
                     console.log(this.realCanvasSize);
                     $('#message-c2').append('<p>' + this.realCanvasSize.toString() + '</p>')
                 });
-                this.game.beginGame();
+                this.game.beginGame(this);
                 break;
         }
     }
 
-    // test()
+    updatePosition () {
+        $.get(this.sensor_address, (data, status) => {
+            console.log(data);
+            console.log(typeof data.x);
+            console.log(typeof this.realCanvasOrigin);
+            this.realCurrentPosition.setX(this.realCanvasOrigin.getX() - data.x);
+            this.realCurrentPosition.setY(data.y - this.realCanvasOrigin.getY());
+            $('.player-position #pos-x').val(this.realCurrentPosition.getX());
+            $('.player-position #pos-y').val(this.realCurrentPosition.getY());
+        });
+        
+    }
 }
 

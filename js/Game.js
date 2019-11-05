@@ -19,10 +19,10 @@ export class Game {
         console.log(this.getStage());
         TweenMax.to("#connect-container h2", 1, { opacity: "0", ease: Power2.easeInOut });
         TweenMax.to("#connect-container h2, #phone-connect-input, #sensor-connect-input", 1, { display: "none", ease: Power2.easeInOut });
-        setTimeout( function () {
+        setTimeout(function () {
             TweenMax.to("#calibration-container, #calibration-container #player-calibration, #player-calibration #message-c1", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
-            TweenMax.to("#calibration-container #h2-player-calibration", 2, { top: "0", opacity: "1", ease: Elastic.easeInOut });    
-            }, 1000
+            TweenMax.to("#calibration-container #h2-player-calibration", 2, { top: "0", opacity: "1", ease: Elastic.easeInOut });
+        }, 1000
         );
     }
 
@@ -39,16 +39,34 @@ export class Game {
         dot.style.right = "0";
     }
 
-    beginGame = () => {
+    beginGame = (p) => {
         this.setStage(gamestage.BEGIN_GAME);
+        this.player = p;
         console.log(this.getStage());
         TweenMax.to("#calibration-container", .5, { display: "none", opacity: "0", ease: Power2.easeInOut });
-        setTimeout( function () {
+        setTimeout(function () {
             TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
-            TweenMax.to("#game-container #h2-missing", 1, { top: "0", opacity: "0.6", ease: Power2.easeInOut });    
-            }, 1000
+            TweenMax.to("#game-container #h2-missing", 1, { top: "0", opacity: "0.6", ease: Power2.easeInOut });
+        }, 1000
         );
         // TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
+        let sketch = (p) => {
+            p.setup = () => this.p5CanvasSetup(p);
+            p.draw = this.p5CanvasDraw;
+        };
+        let myp5 = new p5(sketch);
+        this.player.updatePosition();
+    }
+
+    p5CanvasSetup = (p) => {
+        let canvas = p.createCanvas(500, 500);
+        canvas.parent('game-canvas');
+        p.background(0);
+        p.frameRate(5);
+    }
+
+    p5CanvasDraw = () => {
+        this.player.updatePosition();
 
     }
 }
