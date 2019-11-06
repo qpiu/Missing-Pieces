@@ -10,6 +10,7 @@ const gamestage = {
     START: 'start',
     CALIB_1: 'calibration_1',
     CALIB_2: 'calibration_2',
+    LOAD_IMAGE: 'load_image',
     BEGIN_GAME: 'begin_game'
 }
 

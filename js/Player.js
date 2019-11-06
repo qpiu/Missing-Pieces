@@ -97,7 +97,8 @@ export class Player {
                     console.log(this.realCanvasSize);
                     $('#message-c2').append('<p>' + this.realCanvasSize.toString() + '</p>')
                 });
-                this.game.beginGame(this);
+                //this.game.beginGame(this);
+                this.game.loadGameImage(this);
                 break;
         }
     }
@@ -105,8 +106,6 @@ export class Player {
     updatePosition () {
         $.get(this.sensor_address, (data, status) => {
             console.log(data);
-            console.log(typeof data.x);
-            console.log(typeof this.realCanvasOrigin);
             this.realCurrentPosition.setX(this.realCanvasOrigin.getX() - data.x);
             this.realCurrentPosition.setY(data.y - this.realCanvasOrigin.getY());
             $('.player-position #pos-x').val(this.realCurrentPosition.getX());

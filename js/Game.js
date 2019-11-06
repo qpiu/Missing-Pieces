@@ -1,4 +1,5 @@
 import { gamestage } from './Utils.js';
+import { Picture } from './Picture.js';
 
 export class Game {
     constructor() {
@@ -39,34 +40,57 @@ export class Game {
         dot.style.right = "0";
     }
 
-    beginGame = (p) => {
-        this.setStage(gamestage.BEGIN_GAME);
-        this.player = p;
+    loadGameImage = (pl) => {
+        this.setStage(gamestage.LOAD_IMAGE);
+        this.player = pl;
         console.log(this.getStage());
         TweenMax.to("#calibration-container", .5, { display: "none", opacity: "0", ease: Power2.easeInOut });
         setTimeout(function () {
             TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
-            TweenMax.to("#game-container #h2-missing", 1, { top: "0", opacity: "0.6", ease: Power2.easeInOut });
         }, 1000
         );
-        // TweenMax.to("#game-container", .5, { display: "block", opacity: "1", ease: Power2.easeInOut });
-        let sketch = (p) => {
-            p.setup = () => this.p5CanvasSetup(p);
-            p.draw = this.p5CanvasDraw;
-        };
-        let myp5 = new p5(sketch);
-        this.player.updatePosition();
+
+        this.gamePicture = new Picture();
+        const inputElement = document.getElementById("file");
+        // inputElement.addEventListener("change", (e) => {
+        //     const imageFile = e.target.files[0];
+        //     this.gameImageURL = URL.createObjectURL(imageFile);
+        //     console.log(this.gameImageURL);
+        // });
+        
+        this.beginGame();
     }
 
-    p5CanvasSetup = (p) => {
-        let canvas = p.createCanvas(500, 500);
-        canvas.parent('game-canvas');
-        p.background(0);
-        p.frameRate(5);
+    beginGame = () => {
+        this.setStage(gamestage.BEGIN_GAME);
+        //this.player = pl;
+        console.log(this.getStage());
+        
+        // let sketch = (s) => {
+        //     s.setup = () => this.p5CanvasSetup(s);
+        //     s.draw = this.p5CanvasDraw;
+        // };
+        // let myp5 = new p5(sketch);
+        this.player.updatePosition();
+        const fps = 5;
+        setInterval(this.gameLoop, 1000 / fps);
     }
 
-    p5CanvasDraw = () => {
-        this.player.updatePosition();
 
+    // p5CanvasSetup = (s) => {
+    //     let canvas = s.createCanvas(600, 600);
+    //     canvas.parent('game-canvas');
+    //     // p.background(0);
+    //     s.frameRate(5);
+
+    // }
+
+    // p5CanvasDraw = () => {
+    //     this.player.updatePosition();
+        
+    // }
+
+    gameLoop = () => {
+        this.player.updatePosition();
     }
 }

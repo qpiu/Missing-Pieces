@@ -44,7 +44,7 @@ div #intro-content h1 {
 div #intro-content span {
     font-family: MikadoBold, sans-serif;
     font-size: 110px;
-    color: #FF8A4C;
+    color: #ff8a4c;
     position: relative;
     top: -150px;
     opacity: 0;
@@ -230,7 +230,16 @@ div #intro-content button:hover {
     margin: 0px;
 }
 
-#game-container #btn-load-img {
+#game-container #game-canvas {
+    width: 600px;
+    height: 600px;
+    background-color: rgba(254, 244, 212, 1);
+}
+#_game-canvas {
+    width: 600px;
+    height: 600px;
+}
+/* #game-container #btn-load-img {
     border: none;
     font-family: MikadoBold, sans-serif;
     font-size: 16px;
@@ -244,5 +253,48 @@ div #intro-content button:hover {
 #game-container #btn-load-img:hover {
     background-color: #FF6919;
     color: #eeeeee;
+} */
+
+/* File upload style */
+#load-image-container {
+    margin: 1em;
 }
 
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+[type="file"]+label {
+    background: #f15d22;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: MikadoBold, sans-serif;
+    font-size: inherit;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 1rem 50px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+[type="file"]+label:hover {
+    background-color: #d3460d;
+}
+
+[type="file"]+label.btn-1 {
+    background-color: #f79159;
+    box-shadow: 0 6px #f57128;
+    transition: none;
+}
+
+[type="file"]+label.btn-1:hover {
+    box-shadow: 0 4px #f57128;
+    top: 2px;
+}
