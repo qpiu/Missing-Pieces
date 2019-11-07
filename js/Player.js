@@ -2,7 +2,7 @@ import { gamestage } from './Utils.js';
 
 class Position {
     constructor(x, y) {
-        console.log(`new Pos(${x}, ${y})`);
+        //console.log(`new Pos(${x}, ${y})`);
         this.x = x;
         this.y = y;
     }
@@ -35,6 +35,7 @@ export class Player {
         this.realCanvasOrigin = new Position(-1, -1); // top left position of the space
         this.realCanvasSize = new Position(-1, -1);   // bottom right position of the space
         this.realCurrentPosition = new Position(-1, -1); // current position in the space
+        this.canvasPosition = new Position(-1, -1); // current position mapped to the canvas
     }
 
     phoneConnect(ip) {
@@ -100,18 +101,38 @@ export class Player {
                 //this.game.beginGame(this);
                 this.game.loadGameImage(this);
                 break;
+            case gamestage.BEGIN_GAME:
+                // check if the player's position on canvas is within the correct area of the current piece
+                break;
         }
     }
 
-    updatePosition () {
+    mapPosition(curPos) {
+        // map position to canvas (600px * 600px)
+        let canvasX = curPos.getX() / this.realCanvasSize.getX() * 600;
+        let canvasY = curPos.getY() / this.realCanvasSize.getY() * 600;
+        this.canvasPosition.setX(canvasX);
+        this.canvasPosition.setY(canvasY);
+    }
+
+    showPosition() {
+        const canvas = this.game.game_canvas;
+        const ctx = canvas.getContext('2d');
+        const pin = new Image();
+        pin.onload = () => {
+            ctx.drawImage(pin, this.canvasPosition.getX(), this.canvasPosition.getY(), 64, 64);
+        };
+        pin.src = "./img/player-64.png";
+    }
+
+    updatePosition() {
         $.get(this.sensor_address, (data, status) => {
-            console.log(data);
-            this.realCurrentPosition.setX(this.realCanvasOrigin.getX() - data.x);
+            this.realCurrentPosition.setX(data.x - this.realCanvasOrigin.getX());
             this.realCurrentPosition.setY(data.y - this.realCanvasOrigin.getY());
             $('.player-position #pos-x').val(this.realCurrentPosition.getX());
             $('.player-position #pos-y').val(this.realCurrentPosition.getY());
+            this.mapPosition(this.realCurrentPosition);
         });
-        
     }
 }
 

@@ -66,6 +66,8 @@ export class Game {
 
     gameLoop = () => {
         this.player.updatePosition();
+        this.gamePicture.drawPieces(null);
+        this.player.showPosition();
         if(this.gamePicture.picturePiecesMissing.length > 0) {
             // Still have pieces missing
             //console.log("show image")

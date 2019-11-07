@@ -113,8 +113,10 @@ export class Picture {
             }
         });
         this.picturePiecesMissing = picturePiecesMissing;
-        console.log(this.picturePiecesMissing);
-        cb_begingame();
+        // console.log(this.picturePiecesMissing);
+        if(cb_begingame) {
+            cb_begingame();
+        }
     }
 
 }
