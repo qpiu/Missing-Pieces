@@ -58,6 +58,7 @@ export class Game {
         this.setStage(gamestage.BEGIN_GAME);
         //this.player = pl;
         console.log(this.getStage());        
+        this.game_canvas = document.getElementById('_game-canvas');
         this.player.updatePosition();
         const fps = 5;
         setInterval(this.gameLoop, 1000 / fps);
@@ -68,7 +69,8 @@ export class Game {
         if(this.gamePicture.picturePiecesMissing.length > 0) {
             // Still have pieces missing
             //console.log("show image")
-            this.player.device.showImage(this.gamePicture.picturePiecesMissing[0].url);
+            this.player.device.showImage(this.gamePicture.picturePiecesMissing[0].url); // send image to phone
+            
         } else {
             // All pieces have been put back
         }

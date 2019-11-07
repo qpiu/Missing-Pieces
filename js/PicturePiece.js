@@ -10,10 +10,17 @@ export class PicturePiece {
         this.canvas_holder = null
     }
 
+    setMissing(missing) {
+        this.isMissing = missing;
+    }
+
     draw() {
         const canvas = document.getElementById('_game-canvas');
         const ctx = canvas.getContext('2d');
         if (!this.isMissing) {
+            for (let i = 0; i < this.data.data.length; i += 4) {
+                this.data.data[i + 3] = 180; // set the alpha value of the pieces in place
+            }
             ctx.putImageData(this.data, this.xPos, this.yPos);
         } else {
             const img = new Image();

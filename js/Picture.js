@@ -87,17 +87,18 @@ export class Picture {
                 let piece_x = xi * this.pieceDim;
                 let piece_y = yi * this.pieceDim;
                 let data = this.getPieceData(piece_x, piece_y);
-                let rand_num = Math.round(Math.random() * 10);
-                let isMissing = false;
-                if(count < 3 && rand_num === 1) {
-                    isMissing = true;
-                    count += 1;
-                }
-                let p = new PicturePiece(piece_x, piece_y, data, isMissing); // if random number equals 1, set this piece to be missing 
+                let p = new PicturePiece(piece_x, piece_y, data, false); // if random number equals 1, set this piece to be missing 
                 //let p = new PicturePiece(piece_x, piece_y, data, (yi==2 && xi===3));
                 pieces.push(p);
             }
         }
+
+        // randomly choose 3 missing pieces
+        for(let i = 0; i < 3; i++) {
+            let missing = pieces[Math.floor(Math.random()*pieces.length)];
+            missing.setMissing(true);
+        }
+        
         // console.log(pieces);
         this.picturePieces = pieces;
         this.drawPieces(cb_begingame);
