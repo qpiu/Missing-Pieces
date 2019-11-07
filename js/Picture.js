@@ -3,7 +3,7 @@ import { PicturePiece } from "./PicturePiece.js";
 export class Picture {
     constructor() {
         console.log("new game picture");
-        this.pieceDim = 60; // 60px * 60px for each piece
+        this.pieceDim = 100; // 100px * 100px for each piece
         // this.pieces = 
     }
 
@@ -81,32 +81,39 @@ export class Picture {
         const pCountX = this.pictureW / this.pieceDim;
         const pCountY = this.pictureH / this.pieceDim;
         let pieces = [];
+        let count = 0;
         for (let yi = 0; yi < pCountY; yi++) {
             for (let xi = 0; xi < pCountX; xi++) {
                 let piece_x = xi * this.pieceDim;
                 let piece_y = yi * this.pieceDim;
                 let data = this.getPieceData(piece_x, piece_y);
                 let rand_num = Math.round(Math.random() * 10);
-                
-                let p = new PicturePiece(piece_x, piece_y, data, (rand_num === 1)); // if random number equals 1, set this piece to be missing 
+                let isMissing = false;
+                if(count < 3 && rand_num === 1) {
+                    isMissing = true;
+                    count += 1;
+                }
+                let p = new PicturePiece(piece_x, piece_y, data, isMissing); // if random number equals 1, set this piece to be missing 
+                //let p = new PicturePiece(piece_x, piece_y, data, (yi==2 && xi===3));
                 pieces.push(p);
             }
         }
         // console.log(pieces);
         this.picturePieces = pieces;
-        this.drawPieces();
-        //cb_begingame(); // begin_game after the image pieces has been generated
+        this.drawPieces(cb_begingame);
     }
 
-    drawPieces() {
-        const canvas = document.getElementById('_game-canvas');
-        const ctx = canvas.getContext('2d');
-        //console.log(this.picturePieces);
+    drawPieces(cb_begingame) {
+        const picturePiecesMissing = []
         this.picturePieces.forEach((p, i) => {
-           p.draw();
+            p.draw();
+            if (p.isMissing) {
+                picturePiecesMissing.push(p);
+            }
         });
-        //console.log(this.pictureData);
-        //ctx.putImageData(this.pictureData, 0, 0);
+        this.picturePiecesMissing = picturePiecesMissing;
+        console.log(this.picturePiecesMissing);
+        cb_begingame();
     }
 
 }

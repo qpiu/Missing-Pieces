@@ -57,33 +57,20 @@ export class Game {
     beginGame = () => {
         this.setStage(gamestage.BEGIN_GAME);
         //this.player = pl;
-        console.log(this.getStage());
-        
-        // let sketch = (s) => {
-        //     s.setup = () => this.p5CanvasSetup(s);
-        //     s.draw = this.p5CanvasDraw;
-        // };
-        // let myp5 = new p5(sketch);
+        console.log(this.getStage());        
         this.player.updatePosition();
         const fps = 5;
         setInterval(this.gameLoop, 1000 / fps);
     }
 
-
-    // p5CanvasSetup = (s) => {
-    //     let canvas = s.createCanvas(600, 600);
-    //     canvas.parent('game-canvas');
-    //     // p.background(0);
-    //     s.frameRate(5);
-
-    // }
-
-    // p5CanvasDraw = () => {
-    //     this.player.updatePosition();
-        
-    // }
-
     gameLoop = () => {
         this.player.updatePosition();
+        if(this.gamePicture.picturePiecesMissing.length > 0) {
+            // Still have pieces missing
+            //console.log("show image")
+            this.player.device.showImage(this.gamePicture.picturePiecesMissing[0].url);
+        } else {
+            // All pieces have been put back
+        }
     }
 }

@@ -298,3 +298,14 @@ div #intro-content button:hover {
     box-shadow: 0 4px #f57128;
     top: 2px;
 }
+
+#piece-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+#hidden-container {
+    top: -1000px;
+    position: absolute;
+}
