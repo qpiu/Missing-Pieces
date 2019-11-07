@@ -51,14 +51,7 @@ export class Game {
         );
 
         this.gamePicture = new Picture();
-        const inputElement = document.getElementById("file");
-        // inputElement.addEventListener("change", (e) => {
-        //     const imageFile = e.target.files[0];
-        //     this.gameImageURL = URL.createObjectURL(imageFile);
-        //     console.log(this.gameImageURL);
-        // });
-        
-        this.beginGame();
+        this.gamePicture.setReadFileHandler(this.beginGame);
     }
 
     beginGame = () => {
