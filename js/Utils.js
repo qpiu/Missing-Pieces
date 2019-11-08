@@ -11,7 +11,8 @@ const gamestage = {
     CALIB_1: 'calibration_1',
     CALIB_2: 'calibration_2',
     LOAD_IMAGE: 'load_image',
-    BEGIN_GAME: 'begin_game'
+    BEGIN_GAME: 'begin_game',
+    END_GAME: 'end_game'
 }
 
 export { fadeOut, gamestage };

@@ -224,7 +224,7 @@ div #intro-content button:hover {
     width: 60px;
 }
 
-.player-position .unit {
+.unit {
     color: #666666;
     padding: .5em 1em;
     margin: 0px;

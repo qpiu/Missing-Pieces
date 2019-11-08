@@ -7,7 +7,7 @@ export class PicturePiece {
         this.data = data;
         this.isMissing = missing;
         this.url = ""
-        this.canvas_holder = null
+        this.canvas_holder_id = null
     }
 
     setMissing(missing) {
@@ -29,14 +29,14 @@ export class PicturePiece {
             };
             img.src = "./img/missing.jpg";
 
-            if (!this.canvas_holder) {
+            if (!this.canvas_holder_id) {
                 const canvas_container = document.getElementById('piece-container');
                 const _canvas = document.createElement('canvas');
                 _canvas.setAttribute("id", "_game_piece_holder_" + this.xPos + "_" + this.yPos);
                 _canvas.setAttribute("width", "100");
                 _canvas.setAttribute("height", "100");
                 canvas_container.appendChild(_canvas);
-                this.canvas_holder = _canvas;
+                this.canvas_holder_id = _canvas.getAttribute("id");
                 const _ctx = _canvas.getContext('2d');
                 _ctx.putImageData(this.data, 0, 0);
 
@@ -47,7 +47,6 @@ export class PicturePiece {
                 hidden_ctx.putImageData(this.data, 25, 100);
                 const dataURL = hidden_canvas.toDataURL();
                 //console.log(dataURL);
-
 
                 /* IMGUR */
                 var form = new FormData();

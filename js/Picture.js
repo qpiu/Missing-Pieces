@@ -37,7 +37,7 @@ export class Picture {
             }
             reader.readAsDataURL(e.target.files[0]);
             TweenMax.to("#load-image-container", .5, { display: "none", opacity: "0", ease: Power2.easeInOut });
-            cb_begingame(); // begin_game after the image has loaded
+            //cb_begingame(); // begin_game after the image has loaded
         }
     }
 
@@ -60,8 +60,6 @@ export class Picture {
 
     // get a piece of size pieceDim * pieceDim from position x,y
     getPieceData(x, y) {
-        //console.log("getPieceData");
-        //console.log(this.pictureData);
         let data = [];
         //loop over rows
         for (let i = 0; i < this.pieceDim; i++) {
@@ -99,7 +97,6 @@ export class Picture {
             missing.setMissing(true);
         }
         
-        // console.log(pieces);
         this.picturePieces = pieces;
         this.drawPieces(cb_begingame);
     }
@@ -116,6 +113,14 @@ export class Picture {
         // console.log(this.picturePiecesMissing);
         if(cb_begingame) {
             cb_begingame();
+        }
+    }
+
+    getCurrentMissing() {
+        if(this.picturePiecesMissing.length > 0) {
+            return this.picturePiecesMissing[0];
+        } else {
+            return null;
         }
     }
 

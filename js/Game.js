@@ -5,6 +5,7 @@ export class Game {
     constructor() {
         console.log("new game");
         this.stage = gamestage.START;
+        this.main_game_loop = null;
     }
 
     setStage(st) {
@@ -57,24 +58,27 @@ export class Game {
     beginGame = () => {
         this.setStage(gamestage.BEGIN_GAME);
         //this.player = pl;
-        console.log(this.getStage());        
+        console.log(this.getStage());
         this.game_canvas = document.getElementById('_game-canvas');
         this.player.updatePosition();
         const fps = 5;
-        setInterval(this.gameLoop, 1000 / fps);
+        this.main_game_loop = setInterval(this.gameLoop, 1000 / fps);
     }
 
     gameLoop = () => {
         this.player.updatePosition();
         this.gamePicture.drawPieces(null);
+        if(this.getStage() === gamestage.END_GAME) {
+            clearInterval(this.main_game_loop);
+        }
         this.player.showPosition();
-        if(this.gamePicture.picturePiecesMissing.length > 0) {
+        const currentMissing = this.gamePicture.getCurrentMissing();
+        if (currentMissing != null) {
             // Still have pieces missing
-            //console.log("show image")
-            this.player.device.showImage(this.gamePicture.picturePiecesMissing[0].url); // send image to phone
-            
+            this.player.device.showImage(currentMissing.url); // send image to phone
         } else {
             // All pieces have been put back
+            this.setStage(gamestage.END_GAME);
         }
     }
 }

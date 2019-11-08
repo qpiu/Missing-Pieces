@@ -103,16 +103,31 @@ export class Player {
                 break;
             case gamestage.BEGIN_GAME:
                 // check if the player's position on canvas is within the correct area of the current piece
+                let x = this.canvasPosition.getX();
+                let y = this.canvasPosition.getY();
+                let p_x = this.game.gamePicture.getCurrentMissing().xPos;
+                let p_y = this.game.gamePicture.getCurrentMissing().yPos;
+                console.log(`(${x}, ${y}) | (${p_x}, ${p_y})`)
+                if (x >= p_x && x <= p_x + 100 &&
+                    y >= p_y && y <= p_y + 100) {
+                    console.log("Correct Position!");
+                    this.game.gamePicture.getCurrentMissing().isMissing = false;
+                    $("#"+this.game.gamePicture.getCurrentMissing().canvas_holder_id).remove();
+                } else {
+                    console.log("Wrong Position!");
+                }
                 break;
         }
     }
 
     mapPosition(curPos) {
         // map position to canvas (600px * 600px)
-        let canvasX = curPos.getX() / this.realCanvasSize.getX() * 600;
-        let canvasY = curPos.getY() / this.realCanvasSize.getY() * 600;
+        let canvasX = curPos.getX() / (this.realCanvasSize.getX()-this.realCanvasOrigin.getX()) * 600;
+        let canvasY = curPos.getY() / (this.realCanvasSize.getY()-this.realCanvasOrigin.getY()) * 600;
         this.canvasPosition.setX(canvasX);
         this.canvasPosition.setY(canvasY);
+        $('.player-position #canvas-pos-x').val(this.canvasPosition.getX());
+        $('.player-position #canvas-pos-y').val(this.canvasPosition.getY());
     }
 
     showPosition() {
@@ -120,7 +135,7 @@ export class Player {
         const ctx = canvas.getContext('2d');
         const pin = new Image();
         pin.onload = () => {
-            ctx.drawImage(pin, this.canvasPosition.getX(), this.canvasPosition.getY(), 64, 64);
+            ctx.drawImage(pin, this.canvasPosition.getX()-32, this.canvasPosition.getY()-64, 64, 64);
         };
         pin.src = "./img/player-64.png";
     }
