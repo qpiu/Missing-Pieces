@@ -4,7 +4,6 @@ export class Picture {
     constructor() {
         console.log("new game picture");
         this.pieceDim = 100; // 100px * 100px for each piece
-        // this.pieces = 
     }
 
     setReadFileHandler(cb_begingame) {

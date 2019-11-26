@@ -1,9 +1,8 @@
 import { appearText } from './Intro.js';
 import { Player } from './Player.js';
-import { fadeOut, gamestage } from './Utils.js';
+import { fadeOut } from './Utils.js';
 import { Game } from './Game.js';
 
-//
 let player = null;
 let game = null;
 

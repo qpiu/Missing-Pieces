@@ -1,5 +1,3 @@
-
-
 const fadeOut = (s) => {
     const el = document.querySelector(s);
     el.style.opacity = '0';

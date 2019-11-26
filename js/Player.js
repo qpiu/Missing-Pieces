@@ -124,8 +124,8 @@ export class Player {
         // map position to canvas (600px * 600px)
         let canvasX = curPos.getX() / (this.realCanvasSize.getX()-this.realCanvasOrigin.getX()) * 600;
         let canvasY = curPos.getY() / (this.realCanvasSize.getY()-this.realCanvasOrigin.getY()) * 600;
-        this.canvasPosition.setX(canvasX);
-        this.canvasPosition.setY(canvasY);
+        this.canvasPosition.setX(canvasX.toFixed(2));
+        this.canvasPosition.setY(canvasY.toFixed(2));
         $('.player-position #canvas-pos-x').val(this.canvasPosition.getX());
         $('.player-position #canvas-pos-y').val(this.canvasPosition.getY());
     }

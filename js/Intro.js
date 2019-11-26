@@ -14,6 +14,4 @@ const appearText = () => {
     TweenMax.to(start_button, 8, { css: { opacity: 1 }, delay: 2.5, ease: Elastic.easeOut });
 }
 
-
-
 export { appearText };

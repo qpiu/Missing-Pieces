@@ -1,13 +1,26 @@
+import { Piece } from "./Piece.js";
 
-export class PicturePiece {
+export class PicturePiece extends Piece{
     constructor(x, y, data, missing) {
-        //console.log(`new piece (${x}, ${y}), ${missing}`);
-        this.xPos = x;
-        this.yPos = y;
-        this.data = data;
-        this.isMissing = missing;
+        super(x, y, data, missing);
         this.url = ""
         this.canvas_holder_id = null
+    }
+
+    getX() {
+        return this.xPos;
+    }
+
+    setX(x) {
+        this.xPos = x;
+    }
+
+    getY() {
+        return this.yPos;
+    }
+
+    setY(y) {
+        this.yPos = y;
     }
 
     setMissing(missing) {
@@ -33,22 +46,22 @@ export class PicturePiece {
                 const canvas_container = document.getElementById('piece-container');
                 const _canvas = document.createElement('canvas');
                 _canvas.setAttribute("id", "_game_piece_holder_" + this.xPos + "_" + this.yPos);
-                _canvas.setAttribute("width", "100");
-                _canvas.setAttribute("height", "100");
-                canvas_container.appendChild(_canvas);
+                // _canvas.setAttribute("width", "100");
+                // _canvas.setAttribute("height", "100");
+                // canvas_container.appendChild(_canvas);
                 this.canvas_holder_id = _canvas.getAttribute("id");
-                const _ctx = _canvas.getContext('2d');
-                _ctx.putImageData(this.data, 0, 0);
+                // const _ctx = _canvas.getContext('2d');
+                // _ctx.putImageData(this.data, 0, 0);
 
+                /* Resize the picture piece */
                 const hidden_canvas = document.getElementById('_hidden_canvas');
                 const hidden_ctx = hidden_canvas.getContext('2d');
                 hidden_ctx.fillStyle = "white";
                 hidden_ctx.fill();
                 hidden_ctx.putImageData(this.data, 25, 100);
                 const dataURL = hidden_canvas.toDataURL();
-                //console.log(dataURL);
 
-                /* IMGUR */
+                /* Upload to IMGUR */
                 var form = new FormData();
                 form.append("image", dataURL.split(',')[1]);
                 form.append('type', "base64");
@@ -58,7 +71,7 @@ export class PicturePiece {
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
-                        "Authorization": "Client-ID a113a683e5ab081" //a113a683e5ab081 //6468a0dcfe5fe77 // 
+                        "Authorization": "Client-ID a113a683e5ab081"
                     },
                     "processData": false,
                     "mimeType": "multipart/form-data",
