@@ -2,8 +2,8 @@
 #include <ArduinoJson.h>
 
 // Wifi connection
-const char* ssid = "TELUS4965-2.4G";
-const char* password = "pgbwu36zq6";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
 WiFiServer server(80);
 
 // JSON Object for position
@@ -56,7 +56,7 @@ void setup() {
   Serial.print("http://");
   Serial.print(WiFi.localIP());
   Serial.println("/");
- 
+  Serial.println("");
 }
  
 void loop() {
@@ -68,7 +68,7 @@ void loop() {
   }
  
   // Wait until the client sends some data
-  Serial.println("new client");
+  Serial.println("new request");
   while(!client.available()){
     delay(1);
   }
@@ -90,8 +90,8 @@ void loop() {
   distance_1 = duration_1 * 0.034 / 2;
   
   // Prints the distance on the Serial Monitor
-  Serial.print("X: ");
-  Serial.println(distance_1);
+  //Serial.print("X: ");
+  //Serial.println(distance_1);
 
   // Sensor 2
   // Clears the trigPin
@@ -108,8 +108,8 @@ void loop() {
   
   // Calculating the distance
   distance_2 = duration_2 * 0.034 / 2;
-  Serial.print("Y: ");
-  Serial.println(distance_2);
+  //Serial.print("Y: ");
+  //Serial.println(distance_2);
 
 
 // generate JSON
@@ -125,7 +125,7 @@ client.println("Content-Type: application/json");
   client.println(output);
 
   delay(1);
-  Serial.println("Client disonnected");
+  //Serial.println("Client disonnected");
   Serial.println("");
  
 }

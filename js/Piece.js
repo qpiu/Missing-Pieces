@@ -35,7 +35,7 @@ export class Piece {
         throw new TypeError("<Piece.getX>: Do not call abstract method from child.");
     }
 
-    setX() {
+    setX(x) {
         throw new TypeError("<Piece.setX>: Do not call abstract method from child.");
     }
 
@@ -43,7 +43,7 @@ export class Piece {
         throw new TypeError("<Piece.getY>: Do not call abstract method from child.");
     }
 
-    setY() {
+    setY(y) {
         throw new TypeError("<Piece.setY>:Do not call abstract method from child.");
     }
 
